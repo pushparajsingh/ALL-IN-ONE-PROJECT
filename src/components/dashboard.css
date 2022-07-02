@@ -1,0 +1,19 @@
+.sidebar{
+    float: left;
+    width: 25%;
+    height: 91.5vh;
+    background: rgba(204, 204, 204, 0.8);
+}
+.body{
+    height: 91.5vh;
+    width: 75%;
+    background: black;
+    float: right;
+}
+
+.body > h1{
+ background: black;
+ margin: 0;
+ color: rgb(50, 142, 223);
+}
+

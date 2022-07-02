@@ -1,0 +1,8 @@
+.bgcolor{
+    background: url('./image/img3.jpg') no-repeat center;
+    height: 100vh;
+    }
+input{
+        padding: 5px;
+        border-radius: 10px;
+    }
