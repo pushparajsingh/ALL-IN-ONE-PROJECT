@@ -17,3 +17,23 @@
  color: rgb(50, 142, 223);
 }
 
+.c1{
+    position: fixed;
+    left: 57%;
+    top: 58%;
+}
+.c2{
+    position: fixed;
+    left: 60%;
+    top: 58%;
+}
+.c3{
+    position: fixed;
+    left: 63%;
+    top: 58%;
+}
+.c4{
+    position: fixed;
+    left: 66%;
+    top: 58%;
+}

@@ -17,10 +17,9 @@ export default function Login() {
    const info = JSON.parse(localStorage.getItem('info'));
 // console.log(info);
     const onSubmit = (data) =>{ 
-    const a = info.map((item)=> data.email == item.email );
-    const b = info.map((item)=> data.password == item.password)
-   
-    if(a[0] == b[0])
+    const a = info.filter((item)=> data.email == item.email && data.password == item.password );
+    console.log(a)
+    if(a.length > 0)
     {
       notify("successfully your login")
       setTimeout(()=>{

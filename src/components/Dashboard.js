@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Dashboardnavbar from '../header/Dashboardnavbar';
 import './dashboard.css'
 import Table from 'react-bootstrap/Table';
@@ -18,7 +18,9 @@ export default function Dashboard() {
   const [password, setPassword] = useState(false);
   const [Email,setEmail] = useState();
   const [Num,setNum] = useState();
+  const [visibility,setVisibility] = useState(false);
   const [Username,setUsername] = useState();
+  const [search,setsearch] = useState();
   const handleShow = (token,password) =>{
     setToken(token);
     setPassword(password);
@@ -49,10 +51,19 @@ export default function Dashboard() {
   function Delete(token)
   {
     // console.log(token);
+    let message = window.confirm("Are you sure want to delete");
+    if(message)
+    {
     const a = [data.filter((item)=>{ return item.token != token})];
     localStorage.setItem('info',JSON.stringify(a[0]));
     navigate('/dashboard');
   }
+  }
+(()=>{
+   setTimeout(()=>{
+    setVisibility(true)
+   },3000)
+})()
 
   useEffect(()=>{
     if(Oldkey != key)
@@ -77,12 +88,18 @@ export default function Dashboard() {
   setUsername(e.target.value);
   console.log(333,e.target.value);
   }
+
+  function inputdata(e)
+  {
+    setsearch(e.target.value);
+    console.log(e.target.value);
+  }
   return (
     <div>
       <Dashboardnavbar/>
      <div className='sidebar'>
       <br/><br/>
-      <h1>Side Bar</h1>
+     <input type="text" onChange={inputdata} placeholder="Search email..."/>
       <span><hr style={{color:'black',height:'2px'}}/></span>
       <h3>User name 1</h3>
       <h3>User name 2</h3>
@@ -100,18 +117,31 @@ export default function Dashboard() {
       </thead>
       <tbody>
   
-      {data.map((item,index)=>{
+      {visibility?data.filter((items) => {
+          if (search == null) {
+              return items;
+          } else if (items.email.toLowerCase().includes(search.toLowerCase())) {
+              return items;
+          }}).map((i,index)=>{
         return(
           <tr key={index}>
-          <td>{item.name}</td>
-          <td>{item.email}</td>
-          <td>{item.phone}</td>
-          <td><Button variant="contained" color="error" onClick={()=>Delete(item.token)}>Delete</Button> &nbsp;&nbsp;
-          <Button variant="contained" color="warning" onClick={()=>handleShow(item.token,item.password)}>Update</Button>
+          <td>{i.name}</td>
+          <td>{i.email}</td>
+          <td>{i.phone}</td>
+          <td><Button variant="contained" color="error" onClick={()=>Delete(i.token)}>Delete</Button> &nbsp;&nbsp;
+          <Button variant="contained" color="warning" onClick={()=>handleShow(i.token,i.password)}>Update</Button>
           </td>
         </tr>
         )
-      })}
+      }) : <Fragment>
+   
+   <Spinner animation="grow" variant="danger" className='c1'/>
+   <Spinner animation="grow" variant="warning" className='c2'/>
+   <Spinner animation="grow" variant="info" className='c3'/>
+   <Spinner animation="grow" variant="light" className='c4'/>
+  
+      </Fragment>
+      }
      </tbody>
     </Table>
      </div>
@@ -164,3 +194,31 @@ export default function Dashboard() {
     </div>
   )
 }
+// {
+//   <span className="nav-item searchnav ">
+//   <input className="form-control" value={value} onChange={handleinput} id="navinput" placeholder="Search Your Products..." />
+//   {
+//       Allapi.filter((items) => {
+//           if (value == "") {
+
+//           } else if (items.title.toLowerCase().includes(value.toLowerCase())) {
+//               return items
+//           }
+//       }).map((items) => {
+//           return (
+//               <>
+//                   <div>
+//                       <NavLink onClick={onsearch} id="searchid" to={`/product/${items.id}`}>
+//                           <div className="d-flex searchbox">
+//                               <img src={items.img} alt="searchimg" id="searchnavimg" className="mt-1 ml-4" />
+//                               <p className="searchp mt-1" style={{ color: "black", fontSize: 10 }}>{items.title}.slice(0,5)</p>
+//                           </div>
+//                       </NavLink>
+//                   </div>
+
+//               </>
+//           )
+//       })
+//   }
+// </span>
+// }
