@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Homenavbar from '../header/Homenavbar';
 import './Home.css'
 import Button from '@mui/material/Button';
@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
     const path = useNavigate();
+    useEffect(()=>{
+     
+    },[])
+    
   return (
     <div className='Home'>
     <Homenavbar />

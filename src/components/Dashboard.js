@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
   const Oldkey = sessionStorage.getItem('store');
-  console.log(222,Oldkey);
   const key = useSelector((state) => state.Reducer.key);
   const navigate = useNavigate();
   const data  = JSON.parse(localStorage.getItem("info"))
@@ -21,18 +20,55 @@ export default function Dashboard() {
   const [visibility,setVisibility] = useState(false);
   const [Username,setUsername] = useState();
   const [search,setsearch] = useState();
-  const handleShow = (token,password) =>{
+  const [oldname,setoldname] = useState();
+  const [oldemail,setoldemail] = useState();
+  const [oldphone,setoldphone] = useState();
+  const handleShow = (token,password,name,email,phone) =>{
+    setoldname(name);
+    setoldemail(email);
+    setoldphone(phone);
     setToken(token);
     setPassword(password);
-    setShow(true) }//
+    setShow(true) }
+
+  
   const handleClose = (e) =>{
     e.preventDefault()
     setShow(false);
     const b = {};
+    console.log(777,Username)
+    if(Username == undefined)
+    {
+      // setUsername(oldname);
+      console.log(555,oldname)
+      b.name = oldname;
+    }
+    else
+    {
     b.name = Username;
-    b.email = Email;
+    }
+
+    if(Email == undefined)
+    {
+      // setEmail(oldemail);
+      b.email = oldemail;
+    }
+    else
+    {
+      b.email = Email;
+    }
+    if(Num == undefined)
+    {
+      // setNum(oldphone);
+      b.phone = oldphone;
+    }
+    else
+    {
+      b.phone = Num;
+    }
+   
     b.password = password;
-    b.phone = Num;
+   
     b.token = token;
     const c = [data.map((item)=>{ 
     if(item.token == token)
@@ -75,24 +111,25 @@ export default function Dashboard() {
   function getEmail(e)
   {
      setEmail(e.target.value);
-     console.log(111,e.target.value);
+    //  console.log(111,e.target.value);
   }
 
   function getNumber(e)
   {
   setNum(e.target.value);
-  console.log(222,e.target.value);
+  // console.log(222,e.target.value);
   }
   function getUser(e)
   {
   setUsername(e.target.value);
-  console.log(333,e.target.value);
+  // console.log(333,e.target.value);
   }
 
   function inputdata(e)
-  {
+  {   
+
     setsearch(e.target.value);
-    console.log(e.target.value);
+    // console.log(555,e.target.value);
   }
   return (
     <div>
@@ -129,7 +166,7 @@ export default function Dashboard() {
           <td>{i.email}</td>
           <td>{i.phone}</td>
           <td><Button variant="contained" color="error" onClick={()=>Delete(i.token)}>Delete</Button> &nbsp;&nbsp;
-          <Button variant="contained" color="warning" onClick={()=>handleShow(i.token,i.password)}>Update</Button>
+          <Button variant="contained" color="warning" onClick={()=>handleShow(i.token,i.password,i.name,i.email,i.phone)}>Update</Button>
           </td>
         </tr>
         )
@@ -145,8 +182,8 @@ export default function Dashboard() {
      </tbody>
     </Table>
      </div>
-     <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+     <Modal show={show} >
+        <Modal.Header>
           <Modal.Title>Update Model</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -158,6 +195,7 @@ export default function Dashboard() {
                 placeholder="Enter Updated Email"
                 autoFocus
                 onChange={getEmail}
+                Value={oldemail}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -167,6 +205,7 @@ export default function Dashboard() {
                 placeholder="Enter Phone Number"
                 autoFocus
                 onChange={getNumber}
+               Value={oldphone}
               />
 
             </Form.Group>
@@ -177,9 +216,9 @@ export default function Dashboard() {
                 placeholder="Enter Username"
                 autoFocus
                 onChange={getUser}
+                Value={oldname}
               />
             </Form.Group>
-            
           </Form>
         </Modal.Body>
         <Modal.Footer>

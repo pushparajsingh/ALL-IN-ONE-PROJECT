@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import './login.css'
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Login() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const dispatch = useDispatch()
@@ -16,9 +15,10 @@ export default function Login() {
   const notify = (a) => toast(a);
    const info = JSON.parse(localStorage.getItem('info'));
 // console.log(info);
+    sessionStorage.clear()
     const onSubmit = (data) =>{ 
     const a = info.filter((item)=> data.email == item.email && data.password == item.password );
-    console.log(a)
+    // console.log(a)
     if(a.length > 0)
     {
       notify("successfully your login")
@@ -41,7 +41,11 @@ export default function Login() {
           <form onSubmit={handleSubmit(onSubmit)}  >
             <fieldset  ><legend><h1 style={{color:'white'}}>Login Form</h1></legend>
 
-      <input  {...register("email",{ required: true ,pattern:/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/ })} placeholder="Enter Email"/><br/><br/>
+      <input  
+      {...register("email",{ required: true ,pattern:/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/ })} 
+      placeholder="Enter Email"
+      />
+      <br/><br/>
       {errors.email && <span style={{color:'red'}}>This field is required</span>}<br/>
       {/* include validation with required or other standard HTML validation rules */}
       <input {...register("password", { required: true })} placeholder="Enter Password"/><br/><br/>
