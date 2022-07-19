@@ -1,9 +1,9 @@
-.background{
-background: url('./image/img2.jpg') no-repeat center;
-height: 100vh;
+.background {
+  background: url("./image/img2.jpg") no-repeat center;
+  height: 100vh;
 }
-input{
-    padding: 5px;
-    border-radius: 10px;
-    width: 70%;
+.put {
+  padding: 5px;
+  border-radius: 10px;
+  width: 70%;
 }

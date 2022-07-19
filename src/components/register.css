@@ -1,8 +1,25 @@
-.bgcolor{
-    background: url('./image/img3.jpg') no-repeat center;
-    height: 100vh;
-    }
-input{
-        padding: 5px;
-        border-radius: 10px;
-    }
+.bgcolor {
+  background: url("./image/img3.jpg") no-repeat center;
+  height: 100vh;
+}
+
+.t2 {
+  color: aliceblue;
+}
+#t3 {
+  position: absolute;
+  right: 55%;
+}
+#t4 {
+  position: absolute;
+  right: 46%;
+}
+#s1 {
+  position: absolute;
+  right: 25%;
+  top: 12.5%;
+}
+s2,
+s1 {
+  width: 10px;
+}
