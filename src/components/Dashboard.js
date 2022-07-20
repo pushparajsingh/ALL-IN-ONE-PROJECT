@@ -25,13 +25,15 @@ export default function Dashboard() {
   const [oldname, setoldname] = useState();
   const [oldemail, setoldemail] = useState();
   const [oldphone, setoldphone] = useState();
-  const handleShow = (token, password, name, email, phone) => {
+   const [category, setcategory] = useState();
+  const handleShow = (token, password, name, email, phone,cate) => {
     setoldname(name);
     setoldemail(email);
     setoldphone(phone);
     setToken(token);
     setPassword(password);
     setShow(true);
+    setcategory(cate);
   };
 
   const handleClose = (e) => {
@@ -61,6 +63,7 @@ export default function Dashboard() {
     }
     b.password = password;
     b.token = token;
+    b.Identity = category;
 
     const c = [
       data.map((item) => {
@@ -181,7 +184,8 @@ export default function Dashboard() {
                                 i.password,
                                 i.name,
                                 i.email,
-                                i.phone
+                                i.phone,
+                                i.Identity
                               )
                             }
                           >
